@@ -1,37 +1,17 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./ERC721.sol";
 
 contract NFTSale is ERC721, Ownable {
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    Counters.Counter private tokenId;
     
-    uint256 public salePrice = 100000000000000000;
-
-    constructor() ERC721("Dao Donations NFT", "DDN") public {
-    }
-
-    function mintNFT(string memory tokenURI) public payable returns (bool) {
-        
-        require(msg.value >= salePrice, 'value sent needs to be atleast sale price');
-
-          _tokenIds.increment();
-          uint256 newItemId = _tokenIds.current();
-          _mint(address(msg.sender), newItemId);
-          _setTokenURI(newItemId, tokenURI);
-
-        return true;
-    }
+    uint public salePrice = 1000000000000000000;
     
-    function withdraw(address payable owner) public onlyOwner returns(bool) {
-        owner.transfer(address(this).balance);
-        return true;
-
-    }
-    
-    function setPrice(uint256 price) public onlyOwner returns (bool) {
+    function setPrice(uint price) public onlyOwner returns (bool) {
         salePrice = price;
         return true;
     }
@@ -40,5 +20,8 @@ contract NFTSale is ERC721, Ownable {
         return address(this).balance;
     }
     
+    function withdraw(address _to) external onlyOwner {
+        payable(_to).transfer(address(this).balance);
+    }
 
 }

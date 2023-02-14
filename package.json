@@ -1,5 +1,5 @@
 {
-  "name": "erc721_example",
+  "name": "nft_sales",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aleeeexcool/ERC721_example.git"
+    "url": "git+https://github.com/aleeeexcool/NFT_sales.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aleeeexcool/ERC721_example/issues"
+    "url": "https://github.com/aleeeexcool/NFT_sales/issues"
   },
-  "homepage": "https://github.com/aleeeexcool/ERC721_example#readme",
+  "homepage": "https://github.com/aleeeexcool/NFT_sales#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "hardhat": "^2.12.7"
