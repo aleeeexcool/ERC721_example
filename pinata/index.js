@@ -20,7 +20,7 @@ const options = {
 
 const pinFileToIPFS = () => {
     return pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
-        return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}` //Why I don't get IpfsHash ?????????
+        return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`
 
     }).catch((err) => {
         
