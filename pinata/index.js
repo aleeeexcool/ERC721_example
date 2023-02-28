@@ -20,17 +20,13 @@ const options = {
 
 const pinFileToIPFS = () => {
     return pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
-        return 'https://gateway.pinata.cloud/ipfs/${result.IpfsHash}' //Why I don't get IpfsHash ?????????
+        return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}` //Why I don't get IpfsHash ?????????
 
     }).catch((err) => {
         
         console.log(err);
     });
 }
-
-//IpfsHash: 'Qme5RqGiPZPFA65xNdvinZisirAU1VisAzAwZFWAzatSJ8',
-//PinSize: 1204410,
-//Timestamp: '2023-02-27T15:45:03.015Z'
 
 const getMetadata = async () => {
     const imageUrl = await pinFileToIPFS()
