@@ -26,11 +26,30 @@ const pinFileToIPFS = () => {
         
         console.log(err);
     });
+};
+
+const pinJSONToIPFS = (body) => {
+    return pinata.pinJSONToIPFS(body, options).then((result) => {
+        return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`
+
+    }).catch((err) => {
+        
+        console.log(err);
+    });
 }
 
 const getMetadata = async () => {
     const imageUrl = await pinFileToIPFS()
-    console.log(imageUrl)
+    const body = {
+        name: "Cool Bears Collection",
+        description: "The coolest NFT Collection",
+        image: imageUrl
+    };
+
+    const metadata = await pinJSONToIPFS(body)
+    console.log(metadata)
 }
 
 getMetadata()
+
+// Cool Bear #1 - https://gateway.pinata.cloud/ipfs/QmUeuegqUXgRET42dxdvGTFQDmtf7X7x35aNcJP8u2JFeq
