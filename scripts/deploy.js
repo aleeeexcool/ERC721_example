@@ -1,15 +1,12 @@
-const { ethers } = require("hardhat");
-const { expect } = require("chai");
+const hre = require("hardhat");
 
 async function main() {
-    const Lock = await hre.ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+    const CoolBearsCollection = await hre.ethers.getContractFactory("CoolBearsCollection");
+    const Collection = await CoolBearsCollection.deploy();
 
-    await lock.deployed();
+    await Collection.deployed();
 
-    console.log(
-        `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-    );
+    console.log("CoolBearsCollection deployed to:", Collection.address);
 }
 
 main().catch((error) => {

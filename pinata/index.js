@@ -3,11 +3,11 @@ require('dotenv').config();
 const fs = require('fs');
 
 const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SERCRET);
-const readableStreamForFile = fs.createReadStream('./images/cool-bear-#1.png');
+const readableStreamForFile = fs.createReadStream('./images/cool-bear-#2.png');
 
 const options = {
     pinataMetadata: {
-        name: "Cool Bear #1",
+        name: "Cool Bear #2",
         keyvalues: {
             customKey: 'customValue',
             customKey2: 'customValue2'
@@ -53,3 +53,4 @@ const getMetadata = async () => {
 getMetadata()
 
 // Cool Bear #1 - https://gateway.pinata.cloud/ipfs/QmUeuegqUXgRET42dxdvGTFQDmtf7X7x35aNcJP8u2JFeq
+// Cool Bear #2 - https://gateway.pinata.cloud/ipfs/QmWsxAxT2qARKwzSjktWW7EXD4MD5hURayYGeuqN6swNZ1
