@@ -1,5 +1,5 @@
 # NFT collection (Cool Bears Collection)
 
-This project demonstrates how to run a full NFT collection on an OpenSea test network, with IPFS, etc. 
+This project demonstrates how to run NFT collection on Goerli test network and the possibility of displaying it on an OpenSea (with Pinata (IPFS) and Alchemy). 
 
-To be continue...
+You can check contract on [Ethernscan](https://goerli.etherscan.io)
