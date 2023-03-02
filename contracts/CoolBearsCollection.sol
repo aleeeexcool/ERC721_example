@@ -1,12 +1,15 @@
 //SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
+import "./ERC721.sol";
 import "./ERC721Enumerable.sol";
+import "./ERC721URIStorage.sol";
 
-contract CoolBearsCollection is ERC721Enumerable {
+contract CoolBearsCollection is ERC721, ERC721Enumerable, ERC721URIStorage {
 
-    uint allTokenIds;
-    uint tokenId;
+    address public owner;
+    uint currentTokenId;
     string public collectionName;
     string public collectionNameSymbol;
 
@@ -30,19 +33,19 @@ contract CoolBearsCollection is ERC721Enumerable {
 
     function mintCoolBear(string memory _name, string memory _tokenURI, uint _price) external {
         require(msg.sender != address(0));
-        allTokenIds++;
-        require(!_exists(tokenId));
+        require(!_exists(currentTokenId));
         require(!tokenURIExists[_tokenURI]);
         require(!tokenNameExists[_name]);
 
-        _mint(msg.sender, tokenId);
-        _setTokenURI(tokenId, _tokenURI);
+        _mint(msg.sender, currentTokenId);
+        _setTokenURI(currentTokenId, _tokenURI);
+        currentTokenId++;
 
         tokenURIExists[_tokenURI] = true;
         tokenNameExists[_name] = true;
 
         CoolBear memory newCoolBear = CoolBear(
-        tokenId,
+        currentTokenId,
         _name,
         _tokenURI,
         payable(msg.sender),
@@ -51,7 +54,7 @@ contract CoolBearsCollection is ERC721Enumerable {
         _price,
         0,
         true);
-        allCoolBears[tokenId] = newCoolBear;
+        allCoolBears[currentTokenId] = newCoolBear;
     }
 
     function getTokenOwner(uint _tokenId) public view returns(address) {
@@ -130,7 +133,29 @@ contract CoolBearsCollection is ERC721Enumerable {
         } else {
         coolbear.forSale = true;
         }
-
         allCoolBears[_tokenId] = coolbear;
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        pure
+        override(ERC721, ERC721Enumerable)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function _burn(uint _tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(_tokenId);
+    }
+
+    function tokenURI(
+        uint _tokenId
+    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+        return super.tokenURI(_tokenId);
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint _tokenId) internal override(ERC721, ERC721Enumerable) {
+        super._beforeTokenTransfer(from, to, _tokenId);
     }
 }

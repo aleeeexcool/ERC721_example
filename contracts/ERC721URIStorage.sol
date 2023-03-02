@@ -1,4 +1,5 @@
 //SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 import "./ERC721.sol";
@@ -25,8 +26,8 @@ abstract contract ERC721URIStorage is ERC721 {
         _tokenURIs[tokenId] = _tokenURI;
     }
 
-    function burn(uint tokenId) public virtual override {
-        super.burn(tokenId);
+    function _burn(uint tokenId) internal virtual override {
+        super._burn(tokenId);
 
         if(bytes(_tokenURIs[tokenId]).length != 0) {
             delete _tokenURIs[tokenId];
